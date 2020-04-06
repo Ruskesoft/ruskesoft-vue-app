@@ -1,0 +1,60 @@
+{
+  "tasks": [
+    {
+      "ID": 1,
+      "Title": "Разработать модуль VECTOR",
+      "Author": 1,
+      "Created": "2020/1/20",
+      "DueDate": "2020/1/20",
+      "Performer": 2,
+      "CompletePercent": 35,
+      "CompleteDate": null
+    },
+    {
+      "ID": 2,
+      "Title": "Разработать модуль SIGMA-6",
+      "Author": 1,
+      "Created": "2020/1/20",
+      "DueDate": "2020/1/20",
+      "Performer": 3,
+      "CompletePercent": 56,
+      "CompleteDate": null
+    },
+    {
+      "ID": 5,
+      "Title": "Победить Коронавирус",
+      "Author": 1,
+      "DueDate": "2020/04/30",
+      "Performer": 4,
+      "Created": "2020-04-06T11:36:50.976Z",
+      "CompletePercent": 3
+    },
+    {
+      "ID": 6,
+      "Title": "Сделать чтонибудь хорошее",
+      "Author": 1,
+      "DueDate": "2020/04/16",
+      "Performer": 3,
+      "Created": "2020-04-06T11:40:08.047Z",
+      "CompletePercent": 1
+    }
+  ],
+  "users": [
+    {
+      "ID": 1,
+      "Title": "Иванов И.И."
+    },
+    {
+      "ID": 2,
+      "Title": "Петров П.П."
+    },
+    {
+      "ID": 3,
+      "Title": "Сидоров С.С."
+    },
+    {
+      "ID": 4,
+      "Title": "Морозов М.М."
+    }
+  ]
+}

@@ -3,6 +3,17 @@
   "Update": "Обновить",
   "Delete": "Удалить",
 
+  "Task": "Задача",
+  "Title": "Название",
+  "Author": "Автор",
+  "Created": "Создано",
+  "Modified": "Изменено",
+  "Editor": "Изменил",
+  "DueDate": "Срок",
+  "Performer": "Исполнитель",
+  "CompletePercent": "% выполнения",
+  "CompleteDate": "Выполнено",
+
   "YourName": "Ваше имя",
   "MessageText": "Текст сообщения",
   "SendMessage": "Отправить сообщение",
