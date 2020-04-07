@@ -12,42 +12,45 @@
     <DxExport
         :enabled="true"
         :allow-export-selected-data="true"
-        file-name="Tasks"
-      />
+        file-name="Tasks"/>
     <DxSelection mode="multiple"/>
     <DxEditing
         :allow-adding="true"
         :allow-updating="true"
         :allow-deleting="true"
         :use-icons="true"
-        mode="popup"
-      >
+        mode="popup">
         <DxPopup
           :show-title="true"
-          :title="'Task'|localize"
-        />
+          :title="'Task'|localize"/>
         <DxForm>
-            <!-- <DxItem
+            <DxItem
                 :col-count="2"
                 :col-span="2"
-                item-type="group"
-            > -->
+                item-type="group">
                 <DxItem data-field="Title"/>
+                <DxItem data-field="PerformerID"
+                  editor-type="dxTextArea"/>
                 <DxItem data-field="DueDate"/>
-                <DxItem data-field="Performer"/>
-                <DxItem data-field="CompletePercent"/>
-            <!-- </DxItem> -->
+                <DxItem data-field="StatusID"/>
+                <DxItem data-field="Comment"
+                  :col-span="2"
+                  :editor-options="{ height: 60 }"
+                  editor-type="dxTextArea"/>
+            </DxItem>
         </DxForm>
     </DxEditing>
     <DxColumn 
         data-field="Title" 
         data-type="string"
-        width="25%" 
+        width="20%"
+        :visible="true"
         :caption="'Title'|localize">
         <DxRequiredRule/>
     </DxColumn>
     <DxColumn 
-        data-field="Author" 
+        data-field="AuthorID"
+        :visible="false"
         :caption="'Author'|localize">
         <DxLookup
           :data-source="getUsers"
@@ -57,18 +60,13 @@
     <DxColumn 
         data-field="Created" 
         data-type="date" 
-        :caption="'Created'|localize" 
+        :caption="'Created'|localize"
+        :visible="true"
         format="dd.MM.yyyy">
     </DxColumn>
     <DxColumn 
-        data-field="DueDate" 
-        data-type="date" 
-        :caption="'DueDate'|localize" 
-        format="dd.MM.yyyy">
-        <DxRequiredRule/>
-    </DxColumn>
-    <DxColumn 
-        data-field="Performer" 
+        data-field="PerformerID" 
+        :visible="true"
         :caption="'Performer'|localize">
         <DxLookup
           :data-source="getUsers"
@@ -77,20 +75,54 @@
         <DxRequiredRule/>
     </DxColumn>
     <DxColumn 
-        data-field="CompletePercent" 
-        data-type="number" 
-        :caption="'CompletePercent'|localize" />
-    <DxColumn 
-        data-field="CompleteDate" 
+        data-field="DueDate" 
         data-type="date" 
-        :caption="'CompleteDate'|localize" 
-        format="dd.MM.yyyy" />
+        :caption="'DueDate'|localize"
+        :visible="true"
+        format="dd.MM.yyyy">
+        <DxRequiredRule/>
+    </DxColumn>
+    <DxColumn 
+        data-field="EditorID"
+        :visible="false"
+        :caption="'Editor'|localize">
+        <DxLookup
+          :data-source="getUsers"
+          value-expr="ID"
+          display-expr="Title"/>
+    </DxColumn>
+    <DxColumn 
+        data-field="Modified" 
+        data-type="date" 
+        :caption="'Modified'|localize"
+        :visible="false"
+        format="dd.MM.yyyy">
+    </DxColumn>
+    <DxColumn 
+        data-field="StatusID" 
+        :visible="true"
+        :caption="'TaskStatus'|localize">
+        <DxLookup
+          :data-source="getTaskStatuses"
+          value-expr="ID"
+          display-expr="Title"/>
+    </DxColumn>
+    <DxColumn 
+        data-field="CompletePercent" 
+        data-type="number"
+        :visible="true"
+        :caption="'CompletePercent'|localize">
+    </DxColumn>
+    <DxColumn
+        data-field="Comment"
+        data-type="string"
+        :visible="true"
+        :caption="'Comment'|localize">
+      </DxColumn>
     <DxSummary>
-        <DxTotalItem/>
-        <!-- <DxTotalItem
+        <DxTotalItem
           column="Title"
-          summary-type="count"
-        /> -->
+          summary-type="count"/>
       </DxSummary>
   </DxDataGrid>
 </template>
@@ -113,7 +145,7 @@ export default {
     ...mapActions(["loadUsers", "loadTasks", "loadTask", "createTask", "updateTask", "deleteTask"])
   },
   computed: {
-    ...mapGetters(["getUsers", "getTasks", "getTask"]),
+    ...mapGetters(["getUsers", "getTaskStatuses", "getTasks", "getTask"]),
     taskDataStore () {
       return new CustomStore({
         key: 'ID',

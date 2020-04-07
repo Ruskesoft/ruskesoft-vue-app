@@ -3,58 +3,142 @@
     {
       "ID": 1,
       "Title": "Разработать модуль VECTOR",
-      "Author": 1,
+      "AuthorID": 1,
       "Created": "2020/1/20",
       "DueDate": "2020/1/20",
-      "Performer": 2,
+      "PerformerID": 2,
       "CompletePercent": 35,
-      "CompleteDate": null
+      "EditorID": 1,
+      "Modified": "2020-04-06T17:37:29.075Z",
+      "StatusID": 2,
+      "Author": {},
+      "Comment": "Тест"
     },
     {
       "ID": 2,
       "Title": "Разработать модуль SIGMA-6",
-      "Author": 1,
+      "AuthorID": 1,
       "Created": "2020/1/20",
       "DueDate": "2020/1/20",
-      "Performer": 3,
+      "PerformerID": 3,
       "CompletePercent": 56,
-      "CompleteDate": null
+      "EditorID": 1,
+      "Modified": "2020-04-06T16:32:26.739Z",
+      "StatusID": 3
     },
     {
       "ID": 5,
       "Title": "Победить Коронавирус",
-      "Author": 1,
+      "AuthorID": 1,
       "DueDate": "2020/04/30",
-      "Performer": 4,
+      "PerformerID": 4,
       "Created": "2020-04-06T11:36:50.976Z",
-      "CompletePercent": 3
+      "CompletePercent": 5,
+      "EditorID": 1,
+      "Modified": "2020-04-06T16:32:46.140Z",
+      "StatusID": 2
     },
     {
       "ID": 6,
-      "Title": "Сделать чтонибудь хорошее",
-      "Author": 1,
+      "Title": "Сделать что-нибудь хорошее",
+      "AuthorID": 1,
       "DueDate": "2020/04/16",
-      "Performer": 3,
+      "PerformerID": 3,
       "Created": "2020-04-06T11:40:08.047Z",
-      "CompletePercent": 1
+      "CompletePercent": 1,
+      "EditorID": 1,
+      "Modified": "2020-04-06T16:12:44.808Z",
+      "StatusID": 1
     }
   ],
   "users": [
     {
       "ID": 1,
-      "Title": "Иванов И.И."
+      "Title": "Иванов И.И.",
+      "EditorID": 1,
+      "Modified": "2020-04-07T15:23:27.625Z",
+      "Email": "ivanov@gmai.com",
+      "DepartmentID": 1
     },
     {
       "ID": 2,
-      "Title": "Петров П.П."
+      "Title": "Петров П.П.",
+      "EditorID": 1,
+      "Modified": "2020-04-07T15:19:39.270Z",
+      "DepartmentID": 1,
+      "Email": "petrov@gmail.com"
     },
     {
       "ID": 3,
-      "Title": "Сидоров С.С."
+      "Title": "Сидоров С.С.",
+      "EditorID": 1,
+      "Modified": "2020-04-07T15:24:25.562Z",
+      "Email": "sidorov@gmail.com",
+      "DepartmentID": 2
     },
     {
       "ID": 4,
-      "Title": "Морозов М.М."
+      "Title": "Морозов М.М.",
+      "EditorID": 1,
+      "Modified": "2020-04-07T15:25:52.970Z",
+      "DepartmentID": 2,
+      "Email": "morozov@gmail.com"
+    },
+    {
+      "Title": "Труманов Г.П.",
+      "Email": "trumanov@gmail.com",
+      "ID": 5,
+      "AuthorID": 1,
+      "Created": "2020-04-07T12:47:01.025Z",
+      "Author": {},
+      "EditorID": 1,
+      "Modified": "2020-04-07T15:23:40.241Z",
+      "DepartmentID": 3
+    },
+    {
+      "Title": "Правдин Г.А.",
+      "Email": "pravdin@gmail.com",
+      "DepartmentID": 3,
+      "ID": 6,
+      "AuthorID": 1,
+      "Created": "2020-04-07T15:27:07.477Z"
+    },
+    {
+      "DepartmentID": 2,
+      "Title": "Кривдин Е.Ю.",
+      "Email": "krivdin@gmail.com",
+      "ID": 7,
+      "AuthorID": 1,
+      "Created": "2020-04-07T15:27:50.087Z"
+    }
+  ],
+  "departments": [
+    {
+      "Title": "Отдел проектирования",
+      "ID": 1,
+      "AuthorID": 1,
+      "Created": "2020-04-07T14:57:56.057Z",
+      "Author": {},
+      "EditorID": 1,
+      "Modified": "2020-04-07T15:22:11.175Z",
+      "ChiefID": 1
+    },
+    {
+      "Title": "Отдел разработок",
+      "ID": 2,
+      "AuthorID": 1,
+      "Created": "2020-04-07T14:58:29.353Z",
+      "Author": {},
+      "EditorID": 1,
+      "Modified": "2020-04-07T15:21:59.662Z",
+      "ChiefID": 4
+    },
+    {
+      "Title": "Отдел инноваций",
+      "ChiefID": 5,
+      "ID": 3,
+      "AuthorID": 1,
+      "Created": "2020-04-07T15:21:40.916Z"
     }
   ]
 }

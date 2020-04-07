@@ -1,22 +1,27 @@
 <template>
   <div id="app">
-    <Tasks/>
-    <Posts v-if="0"/>
+    <component :is="layout">
+      <router-view/>
+    </component>
   </div>
 </template>
 
 <script>
-
 import ruMessages from "devextreme/localization/messages/ru.json";
 import { locale, loadMessages } from "devextreme/localization";
 
-import Posts from './components/Posts.vue'
-import Tasks from './components/Tasks.vue'
+import MainLayout from "@/layouts/MainLayout"
+import EmptyLayout from "@/layouts/EmptyLayout"
 
 export default {
   name: 'App',
+  computed: {
+    layout() {
+      return this.$route.meta.layout || "empty-layout";
+    }
+  },
   components: {
-      Posts, Tasks
+    MainLayout, EmptyLayout
   },
   created() {
         loadMessages(ruMessages);
@@ -26,5 +31,12 @@ export default {
 </script>
 
 <style>
-
+  body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    position: relative;
+    font-family: Roboto,RobotoFallback,"Noto Kufi Arabic",Helvetica,Arial,sans-serif;
+    font-size: 13px;
+  }
 </style>
