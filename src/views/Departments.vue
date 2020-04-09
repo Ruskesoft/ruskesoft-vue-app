@@ -1,5 +1,6 @@
 <template>
-  <DxDataGrid
+  <LoadPanel v-if="loading"/>
+  <DxDataGrid v-else
     :data-source="departmentDataStore"
     :show-borders="true"
     :column-auto-width="false"
@@ -21,19 +22,15 @@
           :show-title="true"
           :title="'Department'|localize"/>
         <DxForm>
-          <DxItem
-              :col-count="2"
-              :col-span="2"
-              item-type="group">
-              <DxItem data-field="Title"/>
-              <DxItem data-field="ChiefID"
-                editor-type="dxLookup"/>
-          </DxItem>
+          <DxItem data-field="Title"/>
+          <DxItem data-field="ChiefID"
+            editor-type="dxLookup"/>
       </DxForm>
     </DxEditing>
     <DxColumn 
         data-field="Title" 
         data-type="string"
+        width="20%"
         :visible="true"
         :allow-editing="true"
         :caption="'Title'|localize">
@@ -81,21 +78,16 @@
         data-field="Modified" 
         data-type="date" 
         :caption="'Modified'|localize"
-        :visible="false"
+        :visible="true"
         :allow-editing="false"
         format="dd.MM.yyyy">
     </DxColumn>
-    <DxSummary>
-        <DxTotalItem
-          column="Title"
-          summary-type="count"/>
-      </DxSummary>
   </DxDataGrid>
 </template>
 <script>
 
 
-import { DxDataGrid, DxColumn, DxColumnChooser, DxLookup, DxEditing, DxPopup, DxForm, DxHeaderFilter, DxSearchPanel, DxRequiredRule, DxExport, DxSummary, DxTotalItem } from 'devextreme-vue/data-grid';
+import { DxDataGrid, DxColumn, DxColumnChooser, DxLookup, DxEditing, DxPopup, DxForm, DxHeaderFilter, DxSearchPanel, DxRequiredRule, DxExport } from 'devextreme-vue/data-grid';
 import { DxItem } from 'devextreme-vue/form';
 
 import { mapGetters, mapActions } from "vuex"
@@ -105,10 +97,15 @@ import CustomStore from 'devextreme/data/custom_store';
 
 export default {
   components: {
-    DxDataGrid, DxColumn, DxColumnChooser, DxLookup, DxEditing, DxPopup, DxForm, DxItem, DxHeaderFilter, DxSearchPanel, DxRequiredRule, DxExport, DxSummary, DxTotalItem
+    DxDataGrid, DxColumn, DxColumnChooser, DxLookup, DxEditing, DxPopup, DxForm, DxItem, DxHeaderFilter, DxSearchPanel, DxRequiredRule, DxExport
   },
   methods: {
     ...mapActions(["loadUsers", "loadDepartments", "createDepartment", "updateDepartment", "deleteDepartment"])
+  },
+  data() {
+    return {
+      loading: true
+    }
   },
   computed: {
     ...mapGetters(["getDepartments", "getUsers"]),
@@ -116,7 +113,6 @@ export default {
       return new CustomStore({
         key: 'ID',
         load: async () => {
-          await this.loadDepartments();
           return this.getDepartments;
         },
         insert: async (values) => {
@@ -133,6 +129,8 @@ export default {
   },
   async mounted() {
     await this.loadUsers();
+    await this.loadDepartments();
+    this.loading = false;
   }
 };
 </script>

@@ -1,5 +1,6 @@
 <template>
-  <DxDataGrid
+  <LoadPanel v-if="loading"/>
+  <DxDataGrid v-else
     :data-source="taskDataStore"
     :show-borders="true"
     :column-auto-width="false"
@@ -11,9 +12,7 @@
     <DxColumnChooser :enabled="true"/>
     <DxExport
         :enabled="true"
-        :allow-export-selected-data="true"
         file-name="Tasks"/>
-    <DxSelection mode="multiple"/>
     <DxEditing
         :allow-adding="true"
         :allow-updating="true"
@@ -24,26 +23,22 @@
           :show-title="true"
           :title="'Task'|localize"/>
         <DxForm>
-            <DxItem
-                :col-count="2"
-                :col-span="2"
-                item-type="group">
-                <DxItem data-field="Title"/>
-                <DxItem data-field="PerformerID"
-                  editor-type="dxTextArea"/>
-                <DxItem data-field="DueDate"/>
-                <DxItem data-field="StatusID"/>
-                <DxItem data-field="Comment"
-                  :col-span="2"
-                  :editor-options="{ height: 60 }"
-                  editor-type="dxTextArea"/>
-            </DxItem>
+          <DxItem data-field="Title"/>
+          <DxItem data-field="InitiatorID"
+            editor-type="dxLookup"/>
+          <DxItem data-field="PerformerID"
+            editor-type="dxLookup"/>
+          <DxItem data-field="PerformerMembers"
+            editor-type="dxTagBox"/>
+          <DxItem data-field="ObserverMembers"
+            editor-type="dxTagBox"/>
+          <DxItem data-field="DueDate"/>
         </DxForm>
     </DxEditing>
     <DxColumn 
         data-field="Title" 
         data-type="string"
-        width="20%"
+        width="30%"
         :visible="true"
         :caption="'Title'|localize">
         <DxRequiredRule/>
@@ -61,11 +56,43 @@
         data-field="Created" 
         data-type="date" 
         :caption="'Created'|localize"
-        :visible="true"
+        :visible="false"
         format="dd.MM.yyyy">
     </DxColumn>
     <DxColumn 
-        data-field="PerformerID" 
+        data-field="Initiator.DepartmentID"
+        :group-index="0"
+        :visible="true"
+        :caption="'InitiatorDepartment'|localize">
+        <DxLookup
+          :data-source="getDepartments"
+          value-expr="ID"
+          display-expr="Title"/>
+    </DxColumn>
+    <DxColumn 
+        data-field="InitiatorID"
+        :width="130"
+        :visible="true"
+        :caption="'Initiator'|localize">
+        <DxLookup
+          :data-source="getUsers"
+          value-expr="ID"
+          display-expr="Title"/>
+        <DxRequiredRule/>
+    </DxColumn>
+    <DxColumn 
+        data-field="Performer.DepartmentID"
+        :group-index="1"
+        :visible="true"
+        :caption="'PerformerDepartment'|localize">
+        <DxLookup
+          :data-source="getDepartments"
+          value-expr="ID"
+          display-expr="Title"/>
+    </DxColumn>
+    <DxColumn 
+        data-field="PerformerID"
+        :width="130"
         :visible="true"
         :caption="'Performer'|localize">
         <DxLookup
@@ -75,9 +102,32 @@
         <DxRequiredRule/>
     </DxColumn>
     <DxColumn 
+        data-field="PerformerMembers"
+        :visible="false"
+        :cell-template="cellTemplate"
+        :calculate-filter-expression="calculateFilterExpression"
+        :caption="'PerformerMembers'|localize">
+        <DxLookup
+          :data-source="getUsers"
+          value-expr="ID"
+          display-expr="Title"/>
+    </DxColumn>
+    <DxColumn 
+        data-field="ObserverMembers"
+        :visible="false"
+        :cell-template="cellTemplate"
+        :calculate-filter-expression="calculateFilterExpression"
+        :caption="'ObserverMembers'|localize">
+        <DxLookup
+          :data-source="getUsers"
+          value-expr="ID"
+          display-expr="Title"/>
+    </DxColumn>
+    <DxColumn 
         data-field="DueDate" 
         data-type="date" 
         :caption="'DueDate'|localize"
+        :width="120"
         :visible="true"
         format="dd.MM.yyyy">
         <DxRequiredRule/>
@@ -99,7 +149,8 @@
         format="dd.MM.yyyy">
     </DxColumn>
     <DxColumn 
-        data-field="StatusID" 
+        data-field="StatusID"
+        :width="140"
         :visible="true"
         :caption="'TaskStatus'|localize">
         <DxLookup
@@ -110,26 +161,22 @@
     <DxColumn 
         data-field="CompletePercent" 
         data-type="number"
+        :width="130"
         :visible="true"
         :caption="'CompletePercent'|localize">
     </DxColumn>
     <DxColumn
         data-field="Comment"
         data-type="string"
-        :visible="true"
+        :visible="false"
         :caption="'Comment'|localize">
-      </DxColumn>
-    <DxSummary>
-        <DxTotalItem
-          column="Title"
-          summary-type="count"/>
-      </DxSummary>
+    </DxColumn>
   </DxDataGrid>
 </template>
 <script>
 
 
-import { DxDataGrid, DxColumn, DxColumnChooser, DxLookup, DxEditing, DxPopup, DxForm, DxGroupPanel, DxHeaderFilter, DxSearchPanel, DxRequiredRule, DxExport, DxSelection, DxSummary, DxTotalItem } from 'devextreme-vue/data-grid';
+import { DxDataGrid, DxColumn, DxColumnChooser, DxLookup, DxEditing, DxPopup, DxForm, DxGroupPanel, DxHeaderFilter, DxSearchPanel, DxRequiredRule, DxExport } from 'devextreme-vue/data-grid';
 import { DxItem } from 'devextreme-vue/form';
 
 import { mapGetters, mapActions } from "vuex"
@@ -139,18 +186,36 @@ import CustomStore from 'devextreme/data/custom_store';
 
 export default {
   components: {
-    DxDataGrid, DxColumn, DxColumnChooser, DxLookup, DxEditing, DxPopup, DxForm, DxItem, DxGroupPanel, DxHeaderFilter, DxSearchPanel, DxRequiredRule, DxExport, DxSelection, DxSummary, DxTotalItem
+    DxDataGrid, DxColumn, DxColumnChooser, DxLookup, DxEditing, DxPopup, DxForm, DxItem, DxGroupPanel, DxHeaderFilter, DxSearchPanel, DxRequiredRule, DxExport
   },
   methods: {
-    ...mapActions(["loadUsers", "loadTasks", "loadTask", "createTask", "updateTask", "deleteTask"])
+    ...mapActions(["loadDepartments", "loadUsers", "loadTasks", "loadTask", "createTask", "updateTask", "deleteTask"]),
+    cellTemplate(container, options) {
+      var text = (options.value || []).map(element => {return options.column.lookup.calculateCellValue(element)}).join(', ');
+      container.textContent = text || '\u00A0';
+      container.title = text;
+    }
+  },
+  data() {
+    return {
+      loading: true,
+      calculateFilterExpression: function(filterValue, operation, target) {
+        const dataField = this.dataField;
+        if(target === 'search' && typeof (filterValue) === 'string') {
+          return [dataField, 'contains', filterValue];
+        }
+        else return function(data) {
+          return (data[dataField] || []).indexOf(filterValue) !== -1;
+        };
+      }
+    }
   },
   computed: {
-    ...mapGetters(["getUsers", "getTaskStatuses", "getTasks", "getTask"]),
+    ...mapGetters(["getDepartments", "getUsers", "getTaskStatuses", "getTasks", "getTask"]),
     taskDataStore () {
       return new CustomStore({
         key: 'ID',
         load: async () => {
-          await this.loadTasks();
           return this.getTasks;
         },
         byKey: async (key) => {
@@ -170,7 +235,10 @@ export default {
     },
   },
   async mounted() {
+    await this.loadDepartments();
     await this.loadUsers();
+    await this.loadTasks();
+    this.loading = false;
   }
 };
 </script>

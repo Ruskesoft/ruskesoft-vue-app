@@ -48,4 +48,9 @@ const router = new Router({
     ]
   })
 
-  export default router
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title + " | " + localizeFilter('AppTitle');
+  next()
+})
+
+export default router

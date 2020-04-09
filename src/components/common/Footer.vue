@@ -1,10 +1,10 @@
 <template>
   <div class="footer">
-      <div class="copyright">
-        Копирайт © 1979-2020 Ruskesoft Inc.
+      <div class="copyright-title">
+        {{'AppCopyrightTitle'|localize}}
       </div>
-      <div class="description">
-        Все права защищены. Торговая марка Ruskesoft защищена законом Российской федерации.
+      <div class="copyright-description">
+        {{'AppCopyrightDescription'|localize}}
       </div>
   </div>
 </template>
@@ -21,12 +21,12 @@ export default {
     background-color:  #444;
     padding: 10px 0 80px 0;
   }
-  .copyright {
+  .copyright-title {
     font-size: 12px;
     color: #fff;
     padding: 2px;
   }
-  .description {
+  .copyright-description {
     font-size: 11px;
     color: #fff;
     padding: 2px;

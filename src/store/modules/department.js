@@ -1,17 +1,9 @@
-import axios from "axios"
-
-const url = "http://localhost:3000/departments";
-
-function initDepartment(department) {
-    if(department.AuthorID) {
-        department.Author = {};
-    }
-}
+import api from "@/api"
 
 export default {
     actions: {
         async loadDepartments({commit}) {
-            await axios.get(url)
+            await api.load("departments")
                 .then((res) => {
                     commit("setDepartments", res.data);
                 })
@@ -20,7 +12,7 @@ export default {
                 })
         },
         async loadDepartment({commit}, ID) {
-            await axios.get(url + "/" + ID)
+            await api.load("departments", ID)
                 .then((res) => {
                     commit("setDepartment", res.data);
                 })
@@ -34,7 +26,7 @@ export default {
                 console.log(department.ID)
                 department.AuthorID = 1;
                 department.Created = new Date();
-                await axios.post(url, department)
+                await api.create("departments", department)
                     .then(() => {
                         commit("addDepartment", department);
                     })
@@ -49,7 +41,7 @@ export default {
                 department.EditorID = 1;
                 department.Modified = new Date();
                 Object.assign(department, values);
-                await axios.put(url + "/" + department.ID, department)
+                await api.update("departments", department.ID, department)
                     .then(() => {
                         commit("setDepartment", department);
                     })
@@ -59,7 +51,7 @@ export default {
             }
         },
         async deleteDepartment({commit}, ID) {
-            await axios.delete(url + "/" + ID)
+            await api.delete("departments", ID)
                 .then(() => {
                     commit("removeDepartment", {ID});
                 })
@@ -70,17 +62,15 @@ export default {
     },
     mutations: {
         setDepartments(state, departments) {
-            for(const department of departments) {
-                initDepartment(department);
-            }
             state.departments = departments;
         },
         setDepartment(state, department) {
-            initDepartment(department);
-            state.departments = state.departments.filter(t => t.ID != department.ID).push(department);
+            const stateDepartment = state.departments.find(t => t.ID == department.ID);
+            if(stateDepartment) {
+                Object.assign(stateDepartment, department);
+            }
         },
         addDepartment(state, department) {
-            initDepartment(department);
             state.departments.push(department);
         },
         removeDepartment(state, department) {

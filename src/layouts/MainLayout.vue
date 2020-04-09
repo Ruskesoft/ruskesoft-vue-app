@@ -3,21 +3,8 @@
     <div class="header">
       <Header/>
     </div>
-    <div class="navbar">
-      <Navbar/>
-    </div>
-    <div class="body">
-      <div class="sidebar">
-        <Sidebar/>
-      </div>
-      <div class="page">
-        <!-- <div class="page-title">
-          <h2>{{pageTitle}}</h2>
-        </div> -->
-        <div class="page-content">
-          <router-view/>
-        </div>
-      </div>
+    <div class="content">
+      <router-view/>
     </div>
     <div class="footer">
       <Footer/>
@@ -27,44 +14,30 @@
 
 <script>
 import Header from '@/components/common/Header'
-import Navbar from '@/components/common/Navbar'
-import Sidebar from '@/components/common/Sidebar'
 import Footer from '@/components/common/Footer'
 
 export default {
     name: 'main-layout',
     components: {
-        Header, Navbar, Sidebar, Footer
+        Header, Footer
     },
-    computed: {
-        pageTitle() {
-          return this.$route.meta.title
-        }
-    }
 }
 </script>
 
 <style scoped>
     .header {
-    }
-    .navbar {
-    }
-    .body {
-      display: flex;
-      min-height: 500px;
-    }
-    .page {
+      background-color: rgba(255, 255, 255, 0.6);
+      /* box-shadow: 0 0 4px #555; */
+      position: fixed;
+      z-index: 100;
+      top:0;
+      left:0;
       width: 100%;
-      padding: 4px;
     }
-    .page-title {
-      text-align: center;
-    }
-    h2 {
-      margin: 2px;
-      padding: 5px;
-      font-size: 18px;
-      letter-spacing: 3px;
-      word-spacing: 8px;
+    .content {
+      margin-top: 40px;
+      display: flex;
+      min-height: 450px;
+      padding: 4px 6px 12px 6px;
     }
 </style>

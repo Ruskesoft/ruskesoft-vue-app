@@ -9,10 +9,17 @@
       "PerformerID": 2,
       "CompletePercent": 35,
       "EditorID": 1,
-      "Modified": "2020-04-06T17:37:29.075Z",
+      "Modified": "2020-04-09T13:20:53.777Z",
       "StatusID": 2,
-      "Author": {},
-      "Comment": "Тест"
+      "Comment": "Тест1",
+      "InitiatorID": 9,
+      "ObserverMembers": [
+        9
+      ],
+      "PerformerMembers": [
+        3,
+        5
+      ]
     },
     {
       "ID": 2,
@@ -23,20 +30,27 @@
       "PerformerID": 3,
       "CompletePercent": 56,
       "EditorID": 1,
-      "Modified": "2020-04-06T16:32:26.739Z",
-      "StatusID": 3
+      "Modified": "2020-04-09T04:01:51.711Z",
+      "StatusID": 3,
+      "InitiatorID": 9,
+      "Comment": "2"
     },
     {
       "ID": 5,
       "Title": "Победить Коронавирус",
       "AuthorID": 1,
-      "DueDate": "2020/04/30",
+      "DueDate": "2020/05/01",
       "PerformerID": 4,
       "Created": "2020-04-06T11:36:50.976Z",
       "CompletePercent": 5,
       "EditorID": 1,
-      "Modified": "2020-04-06T16:32:46.140Z",
-      "StatusID": 2
+      "Modified": "2020-04-09T15:19:47.827Z",
+      "StatusID": 2,
+      "InitiatorID": 9,
+      "Comment": "3",
+      "PerformerMembers": [
+        2
+      ]
     },
     {
       "ID": 6,
@@ -47,8 +61,30 @@
       "Created": "2020-04-06T11:40:08.047Z",
       "CompletePercent": 1,
       "EditorID": 1,
-      "Modified": "2020-04-06T16:12:44.808Z",
-      "StatusID": 1
+      "Modified": "2020-04-09T05:51:53.308Z",
+      "StatusID": 1,
+      "InitiatorID": 9,
+      "Comment": "444"
+    },
+    {
+      "Title": "Погулять на улице",
+      "InitiatorID": 7,
+      "PerformerID": 2,
+      "DueDate": "2020/04/22",
+      "StatusID": 1,
+      "ID": 7,
+      "AuthorID": 1,
+      "Created": "2020-04-09T07:38:20.724Z",
+      "EditorID": 1,
+      "Modified": "2020-04-09T14:42:45.945Z",
+      "PerformerMembers": [
+        5,
+        6
+      ],
+      "ObserverMembers": [
+        9,
+        8
+      ]
     }
   ],
   "users": [
@@ -58,7 +94,8 @@
       "EditorID": 1,
       "Modified": "2020-04-07T15:23:27.625Z",
       "Email": "ivanov@gmai.com",
-      "DepartmentID": 1
+      "DepartmentID": 1,
+      "Created": "2020-04-08T06:57:11.458Z"
     },
     {
       "ID": 2,
@@ -66,7 +103,8 @@
       "EditorID": 1,
       "Modified": "2020-04-07T15:19:39.270Z",
       "DepartmentID": 1,
-      "Email": "petrov@gmail.com"
+      "Email": "petrov@gmail.com",
+      "Created": "2020-04-08T06:57:11.458Z"
     },
     {
       "ID": 3,
@@ -74,7 +112,8 @@
       "EditorID": 1,
       "Modified": "2020-04-07T15:24:25.562Z",
       "Email": "sidorov@gmail.com",
-      "DepartmentID": 2
+      "DepartmentID": 2,
+      "Created": "2020-04-08T06:57:11.458Z"
     },
     {
       "ID": 4,
@@ -82,7 +121,8 @@
       "EditorID": 1,
       "Modified": "2020-04-07T15:25:52.970Z",
       "DepartmentID": 2,
-      "Email": "morozov@gmail.com"
+      "Email": "morozov@gmail.com",
+      "Created": "2020-04-08T06:57:11.458Z"
     },
     {
       "Title": "Труманов Г.П.",
@@ -90,7 +130,6 @@
       "ID": 5,
       "AuthorID": 1,
       "Created": "2020-04-07T12:47:01.025Z",
-      "Author": {},
       "EditorID": 1,
       "Modified": "2020-04-07T15:23:40.241Z",
       "DepartmentID": 3
@@ -110,6 +149,32 @@
       "ID": 7,
       "AuthorID": 1,
       "Created": "2020-04-07T15:27:50.087Z"
+    },
+    {
+      "Title": "Важенин Н.А.",
+      "Email": "vazhenin@gmail.com",
+      "DepartmentID": 2,
+      "ID": 8,
+      "AuthorID": 1,
+      "Created": "2020-04-08T03:18:20.442Z"
+    },
+    {
+      "Title": "Маршал О.М",
+      "Email": "marshal@gmail.com",
+      "ID": 9,
+      "AuthorID": 1,
+      "Created": "2020-04-08T06:56:47.211Z",
+      "EditorID": 1,
+      "Modified": "2020-04-09T05:49:35.160Z",
+      "DepartmentID": 4
+    },
+    {
+      "Title": "Волков Д.Л.",
+      "Email": "volkov@gmail.com",
+      "DepartmentID": 5,
+      "ID": 10,
+      "AuthorID": 1,
+      "Created": "2020-04-09T15:28:26.278Z"
     }
   ],
   "departments": [
@@ -118,7 +183,6 @@
       "ID": 1,
       "AuthorID": 1,
       "Created": "2020-04-07T14:57:56.057Z",
-      "Author": {},
       "EditorID": 1,
       "Modified": "2020-04-07T15:22:11.175Z",
       "ChiefID": 1
@@ -128,7 +192,6 @@
       "ID": 2,
       "AuthorID": 1,
       "Created": "2020-04-07T14:58:29.353Z",
-      "Author": {},
       "EditorID": 1,
       "Modified": "2020-04-07T15:21:59.662Z",
       "ChiefID": 4
@@ -139,6 +202,22 @@
       "ID": 3,
       "AuthorID": 1,
       "Created": "2020-04-07T15:21:40.916Z"
+    },
+    {
+      "Title": "Руководство",
+      "ChiefID": 9,
+      "ID": 4,
+      "AuthorID": 1,
+      "Created": "2020-04-08T06:57:11.458Z"
+    },
+    {
+      "Title": "Отдел контроля качества",
+      "ID": 5,
+      "AuthorID": 1,
+      "EditorID": 1,
+      "Modified": "2020-04-09T07:34:50.326Z",
+      "ChiefID": 10,
+      "Created": "2020-04-08T06:57:11.458Z"
     }
   ]
 }

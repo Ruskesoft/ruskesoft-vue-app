@@ -1,4 +1,8 @@
 {
+  "AppTitle": "Система контроля поручений",
+  "AppCopyrightTitle": "© 1979-2020 Авторские права принадлежат компании Раскесофт",
+  "AppCopyrightDescription": "Сделано в России. Все права защищены.",
+  
   "MenuTitle_Home": "Главная",
   "MenuTitle_Tasks": "Задачи",
   "MenuTitle_Users": "Пользователи",
@@ -10,12 +14,22 @@
   "Created": "Дата создания",
   "Modified": "Дата изменения",
   "Editor": "Изменил",
-  "DueDate": "Срок исполнения",
-  "Performer": "Исполнитель",
-  "CompletePercent": "% выполнения",
   "Comment": "Комментарий",
 
+  "User": "Пользователь",
+  "Email": "Email",
+
   "Task": "Задача",
+  "DueDate": "Срок исполнения",
+  "CompletePercent": "% выполнения",
+  "CompleteDate": "Дата выполнения",
+  "Initiator": "Инициатор",
+  "InitiatorDepartment": "Отдел инициатора",
+  "Performer": "Ответственный исполнитель",
+  "PerformerDepartment": "Отдел исполнителя",
+  "PerformerMembers": "Исполнители",
+  "ObserverMembers": "Наблюдатели",
+
   "TaskStatus": "Статус",
   "TaskStatus_New": "Новая",
   "TaskStatus_InWork": "В работе",
@@ -24,14 +38,9 @@
   "TaskStatus_Rejected": "Отклонена",
   "TaskStatus_Finished": "Завершена",
 
-  "User": "Пользователь",
-  "Email": "Email",
   "Department": "Отдел",
   "DepartmentChief": "Начальник отдела",
 
-  "YourName": "Ваше имя",
-  "MessageText": "Текст сообщения",
-  "SendMessage": "Отправить сообщение",
   
-  "LocalizeError": "Ошибка локализации"
+  "LocalizeError": "<Ошибка локализации>"
 }

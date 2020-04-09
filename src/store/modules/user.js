@@ -1,17 +1,10 @@
-import axios from "axios"
-
-const url = "http://localhost:3000/users";
-
-function initUser(user) {
-    if(user.AuthorID) {
-        user.Author = {};
-    }
-}
+import api from "@/api"
 
 export default {
+    
     actions: {
         async loadUsers({commit}) {
-            await axios.get(url)
+            await api.load("users")
                 .then((res) => {
                     commit("setUsers", res.data);
                 })
@@ -20,7 +13,7 @@ export default {
                 })
         },
         async loadUser({commit}, ID) {
-            await axios.get(url + "/" + ID)
+            await api.load("users", ID)
                 .then((res) => {
                     commit("setUser", res.data);
                 })
@@ -33,7 +26,7 @@ export default {
                 user.ID = getters.getLastUser ? (getters.getLastUser.ID + 1) : 0;
                 user.AuthorID = 1;
                 user.Created = new Date();
-                await axios.post(url, user)
+                await api.create("users", user)
                     .then(() => {
                         commit("addUser", user);
                     })
@@ -48,7 +41,7 @@ export default {
                 user.EditorID = 1;
                 user.Modified = new Date();
                 Object.assign(user, values);
-                await axios.put(url + "/" + user.ID, user)
+                await api.update("users", user.ID, user)
                     .then(() => {
                         commit("setUser", user);
                     })
@@ -58,7 +51,7 @@ export default {
             }
         },
         async deleteUser({commit}, ID) {
-            await axios.delete(url + "/" + ID)
+            await api.delete("users", ID)
                 .then(() => {
                     commit("removeUser", {ID});
                 })
@@ -69,17 +62,15 @@ export default {
     },
     mutations: {
         setUsers(state, users) {
-            for(const user of users) {
-                initUser(user);
-            }
             state.users = users;
         },
         setUser(state, user) {
-            initUser(user);
-            state.users = state.users.filter(t => t.ID != user.ID).push(user);
+            const stateUser = state.users.find(t => t.ID == user.ID);
+            if(stateUser) {
+                Object.assign(stateUser, user);
+            }
         },
         addUser(state, user) {
-            initUser(user);
             state.users.push(user);
         },
         removeUser(state, user) {

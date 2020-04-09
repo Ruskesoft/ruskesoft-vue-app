@@ -1,41 +1,58 @@
-import axios from "axios"
+import api from "@/api"
 
-const url = "http://localhost:3000/tasks";
-
-function initTask(task) {
-    if(task.AuthorID) {
-        task.Author = {};
+function initTask(task, rootState) {
+    if(task && rootState) {
+        const users = rootState.user.users;
+        if(users) {
+            if(task.AuthorID) {
+                task.Author = users.find(user => user.ID == task.AuthorID)
+            }
+            if(task.EditorID) {
+                task.Editor = users.find(user => user.ID == task.EditorID)
+            }
+            if(task.InitiatorID) {
+                task.Initiator = users.find(user => user.ID == task.InitiatorID)
+            }
+            if(task.PerformerID) {
+                task.Performer = users.find(user => user.ID == task.PerformerID)
+            }
+        }
     }
 }
 
 export default {
     actions: {
-        async loadTasks({commit}) {
-            await axios.get(url)
+        async loadTasks({commit, rootState}) {
+            await api.load("tasks")
                 .then((res) => {
+                    for(const task of res.data) {
+                        initTask(task, rootState);
+                    }
                     commit("setTasks", res.data);
                 })
                 .catch(e => {
                     throw e;
                 })
         },
-        async loadTask({commit}, ID) {
-            await axios.get(url + "/" + ID)
+        async loadTask({commit, rootState}, ID) {
+            await api.load("tasks", ID)
                 .then((res) => {
+                    initTask(res.data, rootState);
                     commit("setTask", res.data);
                 })
                 .catch(e => {
                     throw e;
                 })
         },
-        async createTask({commit, getters}, task) {
+        async createTask({commit, getters, rootState}, task) {
             if(task) {
                 task.ID = getters.getLastTask ? (getters.getLastTask.ID + 1) : 0;
                 task.AuthorID = 1;
                 task.Created = new Date();
                 task.StatusID = 1;
-                await axios.post(url, task)
+                await api.create("tasks", task)
                     .then(() => {
+                        initTask(task, rootState);
                         commit("addTask", task);
                     })
                     .catch(e => {
@@ -43,14 +60,15 @@ export default {
                     })
             }
         },
-        async updateTask({commit, getters}, {key, values}) {
+        async updateTask({commit, getters, rootState}, {key, values}) {
             const task = getters.getTask(key);
             if(task && task.ID) {
                 task.EditorID = 1;
                 task.Modified = new Date();
                 Object.assign(task, values);
-                await axios.put(url + "/" + task.ID, task)
+                await api.update("tasks", task.ID, task)
                     .then(() => {
+                        initTask(task, rootState);
                         commit("setTask", task);
                     })
                     .catch(e => {
@@ -59,7 +77,7 @@ export default {
             }
         },
         async deleteTask({commit}, ID) {
-            await axios.delete(url + "/" + ID)
+            await api.delete("tasks", ID)
                 .then(() => {
                     commit("removeTask", {ID});
                 })
@@ -70,17 +88,15 @@ export default {
     },
     mutations: {
         setTasks(state, tasks) {
-            for(const task of tasks) {
-                initTask(task);
-            }
             state.tasks = tasks;
         },
         setTask(state, task) {
-            initTask(task);
-            state.tasks = state.tasks.filter(t => t.ID != task.ID).push(task);
+            const stateTask = state.tasks.find(t => t.ID == task.ID);
+            if(stateTask) {
+                Object.assign(stateTask, task);
+            }
         },
         addTask(state, task) {
-            initTask(task);
             state.tasks.push(task);
         },
         removeTask(state, task) {
