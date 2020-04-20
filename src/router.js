@@ -10,28 +10,19 @@ const router = new Router({
     routes: [
       {
         path: '/',
-        name: 'home',
-        component: () => import('./views/Home.vue'),
-        meta: {
-            title: localizeFilter('MenuTitle_Home'),
-            layout: 'main-layout',
-            showInMenu: true
-        }
-      },{
-        path: '/tasks',
         name: 'tasks',
         component: () => import('./views/Tasks.vue'),
         meta: {
-            title: localizeFilter('MenuTitle_Tasks'),
+            title: localizeFilter('Tasks'),
             layout: 'main-layout',
             showInMenu: true
         }
       },{
-        path: '/users',
-        name: 'users',
-        component: () => import('./views/Users.vue'),
+        path: '/employees',
+        name: 'employees',
+        component: () => import('./views/Employees.vue'),
         meta: {
-            title: localizeFilter('MenuTitle_Users'),
+            title: localizeFilter('Employees'),
             layout: 'main-layout',
             showInMenu: true
         }
@@ -40,7 +31,25 @@ const router = new Router({
         name: 'departments',
         component: () => import('./views/Departments.vue'),
         meta: {
-            title: localizeFilter('MenuTitle_Departments'),
+            title: localizeFilter('Departments'),
+            layout: 'main-layout',
+            showInMenu: true
+        }
+      },{
+        path: '/positions',
+        name: 'positions',
+        component: () => import('./views/Positions.vue'),
+        meta: {
+            title: localizeFilter('Positions'),
+            layout: 'main-layout',
+            showInMenu: true
+        }
+      },{
+        path: '/users',
+        name: 'users',
+        component: () => import('./views/Users.vue'),
+        meta: {
+            title: localizeFilter('Users'),
             layout: 'main-layout',
             showInMenu: true
         }

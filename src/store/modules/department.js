@@ -11,8 +11,8 @@ export default {
                     throw e;
                 })
         },
-        async loadDepartment({commit}, ID) {
-            await api.load("departments", ID)
+        async loadDepartment({commit}, key) {
+            await api.load("departments", key)
                 .then((res) => {
                     commit("setDepartment", res.data);
                 })
@@ -20,15 +20,12 @@ export default {
                     throw e;
                 })
         },
-        async createDepartment({commit, getters}, department) {
-            if(department) {
-                department.ID = getters.getLastDepartment ? (getters.getLastDepartment.ID + 1) : 0;
-                console.log(department.ID)
-                department.AuthorID = 1;
-                department.Created = new Date();
-                await api.create("departments", department)
+        async createDepartment({commit, getters}, values) {
+            const department = getters.getDepartmentByTitle(values.Title);
+            if(!department) {
+                await api.create("departments", values)
                     .then(() => {
-                        commit("addDepartment", department);
+                        commit("addDepartment", values);
                     })
                     .catch(e => {
                         throw e;
@@ -36,10 +33,8 @@ export default {
             }
         },
         async updateDepartment({commit, getters}, {key, values}) {
-            const department = getters.getDepartment(key);
+            const department = getters.getDepartmentByID(key);
             if(department && department.ID) {
-                department.EditorID = 1;
-                department.Modified = new Date();
                 Object.assign(department, values);
                 await api.update("departments", department.ID, department)
                     .then(() => {
@@ -50,10 +45,10 @@ export default {
                     })
             }
         },
-        async deleteDepartment({commit}, ID) {
-            await api.delete("departments", ID)
+        async deleteDepartment({commit}, key) {
+            await api.delete("departments", key)
                 .then(() => {
-                    commit("removeDepartment", {ID});
+                    commit("removeDepartment", {ID:key});
                 })
                 .catch(e => {
                     throw e;
@@ -84,15 +79,11 @@ export default {
         getDepartments: (state) => {
             return state.departments;
         },
-        getDepartmentCount: (state) => {
-            return state.departments.length;
+        getDepartmentByID: (state) => (ID) => {
+            return state.departments.find(d => d.ID == ID);
         },
-        getDepartment: (state) => (ID) => {
-            return state.departments.find(t => t.ID == ID);
-        },
-        getLastDepartment: (state) => {
-            if(state.departments.length == 0) return null;
-            return state.departments.reduce((a, c) => a.ID > c.ID ? a : c);
+        getDepartmentByTitle: (state) => (Title) => {
+            return state.departments.find(d => d.Title == Title);
         }
     }
 }

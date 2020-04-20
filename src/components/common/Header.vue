@@ -10,7 +10,7 @@
       />
     </div>
     <div class="header-title">
-      <h1>{{'AppTitle'|localize}} - {{pageTitle}}</h1>
+      <h1>{{pageTitle}} - {{'AppTitle'|localize}}</h1>
     </div>
     <div class="header-user-menu">
       
@@ -34,6 +34,7 @@ export default {
       return {
         dataSource: [{
           icon: "menu",
+          // meta: { title: this.$route.meta.title},
           items: this.$router.options.routes.filter(r => r.meta.showInMenu)
         }]
       }
@@ -41,7 +42,8 @@ export default {
     methods: {
       itemClick(e) {
         if(e.itemData.path && e.itemData.path != this.$route.path) {
-          this.$router.push(e.itemData.path)
+          // e.component.option("dataSource")[0].meta.title = e.itemData.meta.title;
+          this.$router.push(e.itemData.path);
         }
       }
     }

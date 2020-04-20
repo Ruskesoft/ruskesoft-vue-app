@@ -12,7 +12,7 @@
     <DxColumnChooser :enabled="true"/>
     <DxExport
         :enabled="true"
-        file-name="Tasks"/>
+        :file-name="'Tasks'|localize"/>
     <DxEditing
         :allow-adding="true"
         :allow-updating="true"
@@ -189,7 +189,7 @@ export default {
     DxDataGrid, DxColumn, DxColumnChooser, DxLookup, DxEditing, DxPopup, DxForm, DxItem, DxGroupPanel, DxHeaderFilter, DxSearchPanel, DxRequiredRule, DxExport
   },
   methods: {
-    ...mapActions(["loadDepartments", "loadUsers", "loadTasks", "loadTask", "createTask", "updateTask", "deleteTask"]),
+    ...mapActions(["loadDepartments", "loadUsers", "loadTasks", "createTask", "updateTask", "deleteTask"]),
     cellTemplate(container, options) {
       var text = (options.value || []).map(element => {return options.column.lookup.calculateCellValue(element)}).join(', ');
       container.textContent = text || '\u00A0';
@@ -211,16 +211,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["getDepartments", "getUsers", "getTaskStatuses", "getTasks", "getTask"]),
+    ...mapGetters(["getDepartments", "getUsers", "getTaskStatuses", "getTasks"]),
     taskDataStore () {
       return new CustomStore({
         key: 'ID',
         load: async () => {
           return this.getTasks;
-        },
-        byKey: async (key) => {
-          await this.loadTask(key);
-          return this.getTask(key);
         },
         insert: async (values) => {
           await this.createTask(values);

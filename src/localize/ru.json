@@ -1,24 +1,25 @@
 {
   "AppTitle": "Система контроля поручений",
-  "AppCopyrightTitle": "© 1979-2020 Авторские права принадлежат компании Раскесофт",
+  "AppCopyrightTitle": "© 1979-2020 компания Раскесофт",
   "AppCopyrightDescription": "Сделано в России. Все права защищены.",
+
   
-  "MenuTitle_Home": "Главная",
-  "MenuTitle_Tasks": "Задачи",
-  "MenuTitle_Users": "Пользователи",
-  "MenuTitle_Departments": "Отделы",
-    
   "Name": "Имя",
   "Title": "Название",
+  "Email": "Email",
   "Author": "Создал",
   "Created": "Дата создания",
   "Modified": "Дата изменения",
   "Editor": "Изменил",
   "Comment": "Комментарий",
 
+  "Users": "Пользователи",
   "User": "Пользователь",
-  "Email": "Email",
+  "UserName": "Имя пользователя",
+  "UserTitle": "Имя",
+  "UserPassword": "Пароль",
 
+  "Tasks": "Задачи",
   "Task": "Задача",
   "DueDate": "Срок исполнения",
   "CompletePercent": "% выполнения",
@@ -30,7 +31,9 @@
   "PerformerMembers": "Исполнители",
   "ObserverMembers": "Наблюдатели",
 
+  "TaskStatuses": "Статусы",
   "TaskStatus": "Статус",
+  "TaskStatusTitle": "Название статуса",
   "TaskStatus_New": "Новая",
   "TaskStatus_InWork": "В работе",
   "TaskStatus_Paused": "Приостановлена",
@@ -38,9 +41,25 @@
   "TaskStatus_Rejected": "Отклонена",
   "TaskStatus_Finished": "Завершена",
 
-  "Department": "Отдел",
-  "DepartmentChief": "Начальник отдела",
+  "Employees": "Сотрудники",
+  "Employee": "Сотрудник",
+  "EmployeeTitle": "Имя",
+  "EmployeeEmail": "Эл. почта",
+  "EmployeeNumber": "Табельный номер",
+  "EmployeePhoneNumber": "Номер телефона",
+  "EmployeeDepartment": "Отдел",
+  "EmployeePosition": "Должность",
 
+  "Departments": "Отделы",
+  "Department": "Отдел",
+  "DepartmentTtile": "Название отдела",
+  "DepartmentChief": "Начальник отдела",
+  "DepartmentEmployees": "Сотрудники отдела",
+
+  "Positions": "Должности",
+  "Position": "Должность",
+  "PositionTitle": "Название",
+  "PositionIsChief": "Руководитель",
   
   "LocalizeError": "<Ошибка локализации>"
 }

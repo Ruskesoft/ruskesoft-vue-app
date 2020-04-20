@@ -34,8 +34,8 @@ export default {
                     throw e;
                 })
         },
-        async loadTask({commit, rootState}, ID) {
-            await api.load("tasks", ID)
+        async loadTask({commit, rootState}, key) {
+            await api.load("tasks", key)
                 .then((res) => {
                     initTask(res.data, rootState);
                     commit("setTask", res.data);
@@ -44,27 +44,20 @@ export default {
                     throw e;
                 })
         },
-        async createTask({commit, getters, rootState}, task) {
-            if(task) {
-                task.ID = getters.getLastTask ? (getters.getLastTask.ID + 1) : 0;
-                task.AuthorID = 1;
-                task.Created = new Date();
-                task.StatusID = 1;
-                await api.create("tasks", task)
-                    .then(() => {
-                        initTask(task, rootState);
-                        commit("addTask", task);
-                    })
-                    .catch(e => {
-                        throw e;
-                    })
-            }
+        async createTask({commit, rootState}, values) {
+            values.StatusID = 1;
+            await api.create("tasks", values)
+                .then(() => {
+                    initTask(values, rootState);
+                    commit("addTask", values);
+                })
+                .catch(e => {
+                    throw e;
+                })
         },
         async updateTask({commit, getters, rootState}, {key, values}) {
-            const task = getters.getTask(key);
+            const task = getters.getTaskByID(key);
             if(task && task.ID) {
-                task.EditorID = 1;
-                task.Modified = new Date();
                 Object.assign(task, values);
                 await api.update("tasks", task.ID, task)
                     .then(() => {
@@ -76,10 +69,10 @@ export default {
                     })
             }
         },
-        async deleteTask({commit}, ID) {
-            await api.delete("tasks", ID)
+        async deleteTask({commit}, key) {
+            await api.delete("tasks", key)
                 .then(() => {
-                    commit("removeTask", {ID});
+                    commit("removeTask", {ID:key});
                 })
                 .catch(e => {
                     throw e;
@@ -110,14 +103,8 @@ export default {
         getTasks: (state) => {
             return state.tasks;
         },
-        getTaskCount: (state) => {
-            return state.tasks.length;
-        },
-        getTask: (state) => (ID) => {
+        getTaskByID: (state) => (ID) => {
             return state.tasks.find(t => t.ID == ID);
-        },
-        getLastTask: (state) => {
-            return state.tasks.reduce((a, c) => a.ID > c.ID ? a : c);
         }
     }
 }

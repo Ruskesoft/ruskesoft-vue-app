@@ -1,7 +1,7 @@
 <template>
   <LoadPanel v-if="loading"/>
   <DxDataGrid v-else
-    :data-source="userDataStore"
+    :data-source="employeeDataStore"
     :show-borders="true"
     :column-auto-width="false"
     :hower-state-enabled="true"
@@ -12,19 +12,22 @@
     <DxColumnChooser :enabled="true"/>
     <DxExport
         :enabled="true"
-        :file-name="'Users'|localize"/>
+        :file-name="'Employees'|localize"/>
     <DxEditing
-        :allow-adding="true"
+        :allow-adding="false"
         :allow-updating="true"
         :allow-deleting="true"
         :use-icons="true"
         mode="popup">
         <DxPopup
           :show-title="true"
-          :title="'User'|localize"/>
+          :title="'Employee'|localize"/>
         <DxForm>
           <DxItem data-field="Title"/>
-          <DxItem data-field="Email"/>
+          <DxItem data-field="EmployeeNumber"/>
+          <DxItem data-field="PhoneNumber"/>
+          <DxItem data-field="DepartmentID"/>
+          <DxItem data-field="PositionID"/>
         </DxForm>
     </DxEditing>
     <DxColumn 
@@ -32,16 +35,47 @@
         data-type="string"
         width="30%"
         :visible="true"
-        :caption="'UserTitle'|localize">
+        :caption="'EmployeeTitle'|localize">
+        <DxRequiredRule/>
+    </DxColumn>
+    <DxColumn 
+        data-field="PositionID"
+        :visible="true"
+        :caption="'EmployeePosition'|localize">
+        <DxLookup
+          :data-source="getPositions"
+          value-expr="ID"
+          display-expr="Title"/>
+    </DxColumn>
+    <DxColumn 
+        data-field="EmployeeNumber" 
+        data-type="string"
+        :visible="true"
+        :caption="'EmployeeNumber'|localize">
         <DxRequiredRule/>
     </DxColumn>
     <DxColumn 
         data-field="Email" 
         data-type="string"
         :visible="true"
-        :caption="'Email'|localize">
-        <DxRequiredRule/>
-        <DxEmailRule/>
+        :allow-editing="false"
+        :caption="'EmployeeEmail'|localize">
+    </DxColumn>
+    <DxColumn 
+        data-field="PhoneNumber" 
+        data-type="string"
+        :visible="true"
+        :caption="'EmployeePhoneNumber'|localize">
+    </DxColumn>
+    <DxColumn 
+        data-field="DepartmentID"
+        :visible="true"
+        :group-index="0"
+        :caption="'EmployeeDepartment'|localize">
+        <DxLookup
+          :data-source="getDepartments"
+          value-expr="ID"
+          display-expr="Title"/>
     </DxColumn>
     <DxColumn 
         data-field="AuthorID"
@@ -56,7 +90,7 @@
         data-field="Created" 
         data-type="date" 
         :caption="'Created'|localize"
-        :visible="true"
+        :visible="false"
         format="dd.MM.yyyy">
     </DxColumn>
     <DxColumn 
@@ -72,7 +106,7 @@
         data-field="Modified" 
         data-type="date" 
         :caption="'Modified'|localize"
-        :visible="true"
+        :visible="false"
         format="dd.MM.yyyy">
     </DxColumn>
   </DxDataGrid>
@@ -80,7 +114,7 @@
 <script>
 
 
-import { DxDataGrid, DxColumn, DxColumnChooser, DxLookup, DxEditing, DxPopup, DxForm, DxGroupPanel, DxHeaderFilter, DxSearchPanel, DxRequiredRule, DxEmailRule, DxExport } from 'devextreme-vue/data-grid';
+import { DxDataGrid, DxColumn, DxColumnChooser, DxLookup, DxEditing, DxPopup, DxForm, DxGroupPanel, DxHeaderFilter, DxSearchPanel, DxRequiredRule, DxExport } from 'devextreme-vue/data-grid';
 import { DxItem } from 'devextreme-vue/form';
 
 import { mapGetters, mapActions } from "vuex"
@@ -90,10 +124,10 @@ import CustomStore from 'devextreme/data/custom_store';
 
 export default {
   components: {
-    DxDataGrid, DxColumn, DxColumnChooser, DxLookup, DxEditing, DxPopup, DxForm, DxItem, DxGroupPanel, DxHeaderFilter, DxSearchPanel, DxRequiredRule, DxEmailRule, DxExport
+    DxDataGrid, DxColumn, DxColumnChooser, DxLookup, DxEditing, DxPopup, DxForm, DxItem, DxGroupPanel, DxHeaderFilter, DxSearchPanel, DxRequiredRule, DxExport
   },
   methods: {
-    ...mapActions(["loadUsers", "createUser", "updateUser", "deleteUser"])
+    ...mapActions(["loadDepartments", "loadPositions", "loadUsers", "createUser", "updateUser", "deleteUser"])
   },
   data() {
     return {
@@ -101,8 +135,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["getUsers"]),
-    userDataStore () {
+    ...mapGetters(["getDepartments", "getPositions", "getUsers"]),
+    employeeDataStore () {
       return new CustomStore({
         key: 'ID',
         load: async () => {
@@ -121,6 +155,8 @@ export default {
     },
   },
   async mounted() {
+    await this.loadDepartments();
+    await this.loadPositions();
     await this.loadUsers();
     this.loading = false;
   }

@@ -1,18 +1,17 @@
 <template>
   <LoadPanel v-if="loading"/>
   <DxDataGrid v-else
-    :data-source="userDataStore"
+    :data-source="positionDataStore"
     :show-borders="true"
     :column-auto-width="false"
     :hower-state-enabled="true"
     key-expr="ID">
     <DxSearchPanel :visible="true"/>
     <DxHeaderFilter :visible="true"/>
-    <DxGroupPanel :visible="true"/>
     <DxColumnChooser :enabled="true"/>
     <DxExport
         :enabled="true"
-        :file-name="'Users'|localize"/>
+        file-name="Positions"/>
     <DxEditing
         :allow-adding="true"
         :allow-updating="true"
@@ -21,31 +20,32 @@
         mode="popup">
         <DxPopup
           :show-title="true"
-          :title="'User'|localize"/>
+          :title="'Position'|localize"/>
         <DxForm>
           <DxItem data-field="Title"/>
-          <DxItem data-field="Email"/>
-        </DxForm>
+          <DxItem data-field="IsChief"/>
+      </DxForm>
     </DxEditing>
     <DxColumn 
         data-field="Title" 
         data-type="string"
         width="30%"
         :visible="true"
-        :caption="'UserTitle'|localize">
+        :allow-editing="true"
+        :caption="'PositionTitle'|localize">
         <DxRequiredRule/>
     </DxColumn>
     <DxColumn 
-        data-field="Email" 
-        data-type="string"
+        data-field="IsChief" 
+        data-type="boolean"
         :visible="true"
-        :caption="'Email'|localize">
-        <DxRequiredRule/>
-        <DxEmailRule/>
+        :allow-editing="true"
+        :caption="'PositionIsChief'|localize">
     </DxColumn>
     <DxColumn 
         data-field="AuthorID"
         :visible="false"
+        :allow-editing="false"
         :caption="'Author'|localize">
         <DxLookup
           :data-source="getUsers"
@@ -57,11 +57,13 @@
         data-type="date" 
         :caption="'Created'|localize"
         :visible="true"
+        :allow-editing="false"
         format="dd.MM.yyyy">
     </DxColumn>
     <DxColumn 
         data-field="EditorID"
         :visible="false"
+        :allow-editing="false"
         :caption="'Editor'|localize">
         <DxLookup
           :data-source="getUsers"
@@ -73,6 +75,7 @@
         data-type="date" 
         :caption="'Modified'|localize"
         :visible="true"
+        :allow-editing="false"
         format="dd.MM.yyyy">
     </DxColumn>
   </DxDataGrid>
@@ -80,7 +83,7 @@
 <script>
 
 
-import { DxDataGrid, DxColumn, DxColumnChooser, DxLookup, DxEditing, DxPopup, DxForm, DxGroupPanel, DxHeaderFilter, DxSearchPanel, DxRequiredRule, DxEmailRule, DxExport } from 'devextreme-vue/data-grid';
+import { DxDataGrid, DxColumn, DxColumnChooser, DxLookup, DxEditing, DxPopup, DxForm, DxHeaderFilter, DxSearchPanel, DxRequiredRule, DxExport } from 'devextreme-vue/data-grid';
 import { DxItem } from 'devextreme-vue/form';
 
 import { mapGetters, mapActions } from "vuex"
@@ -90,10 +93,10 @@ import CustomStore from 'devextreme/data/custom_store';
 
 export default {
   components: {
-    DxDataGrid, DxColumn, DxColumnChooser, DxLookup, DxEditing, DxPopup, DxForm, DxItem, DxGroupPanel, DxHeaderFilter, DxSearchPanel, DxRequiredRule, DxEmailRule, DxExport
+    DxDataGrid, DxColumn, DxColumnChooser, DxLookup, DxEditing, DxPopup, DxForm, DxItem, DxHeaderFilter, DxSearchPanel, DxRequiredRule, DxExport
   },
   methods: {
-    ...mapActions(["loadUsers", "createUser", "updateUser", "deleteUser"])
+    ...mapActions(["loadUsers", "loadPositions", "createPosition", "updatePosition", "deletePosition"])
   },
   data() {
     return {
@@ -101,27 +104,28 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["getUsers"]),
-    userDataStore () {
+    ...mapGetters(["getPositions", "getUsers"]),
+    positionDataStore () {
       return new CustomStore({
         key: 'ID',
         load: async () => {
-          return this.getUsers;
+          return this.getPositions;
         },
         insert: async (values) => {
-          await this.createUser(values);
+          await this.createPosition(values);
         },
         update: async (key, values) => {
-          await this.updateUser({key, values});
+          await this.updatePosition({key, values});
         },
         remove: async (key) => {
-          await this.deleteUser(key);
+          await this.deletePosition(key);
         }
       })
     },
   },
   async mounted() {
     await this.loadUsers();
+    await this.loadPositions();
     this.loading = false;
   }
 };

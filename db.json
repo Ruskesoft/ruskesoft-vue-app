@@ -1,223 +1,307 @@
 {
   "tasks": [
     {
-      "ID": 1,
-      "Title": "Разработать модуль VECTOR",
-      "AuthorID": 1,
+      "ID": "1",
+      "Title": "Спроектировать модуль \"VECTOR\"",
+      "AuthorID": "1",
       "Created": "2020/1/20",
       "DueDate": "2020/1/20",
-      "PerformerID": 2,
+      "PerformerID": "2",
       "CompletePercent": 35,
-      "EditorID": 1,
-      "Modified": "2020-04-09T13:20:53.777Z",
+      "EditorID": "1",
+      "Modified": "2020-04-10T11:49:00.218Z",
       "StatusID": 2,
       "Comment": "Тест1",
-      "InitiatorID": 9,
-      "ObserverMembers": [
-        9
-      ],
-      "PerformerMembers": [
-        3,
-        5
-      ]
+      "InitiatorID": "9",
+      "EditVersion": 2
     },
     {
-      "ID": 2,
-      "Title": "Разработать модуль SIGMA-6",
-      "AuthorID": 1,
+      "ID": "2",
+      "Title": "Разработать модуль \"SIGMA-6\"",
+      "AuthorID": "1",
       "Created": "2020/1/20",
       "DueDate": "2020/1/20",
-      "PerformerID": 3,
+      "PerformerID": "3",
       "CompletePercent": 56,
-      "EditorID": 1,
-      "Modified": "2020-04-09T04:01:51.711Z",
+      "EditorID": "1",
+      "Modified": "2020-04-10T11:48:44.411Z",
       "StatusID": 3,
-      "InitiatorID": 9,
-      "Comment": "2"
+      "InitiatorID": "9",
+      "Comment": "2",
+      "EditVersion": 1
     },
     {
-      "ID": 5,
-      "Title": "Победить Коронавирус",
-      "AuthorID": 1,
+      "ID": "5",
+      "Title": "Разработать интерфейс модуля \"Дельта\"",
+      "AuthorID": "1",
       "DueDate": "2020/05/01",
-      "PerformerID": 4,
+      "PerformerID": "4",
       "Created": "2020-04-06T11:36:50.976Z",
       "CompletePercent": 5,
-      "EditorID": 1,
-      "Modified": "2020-04-09T15:19:47.827Z",
+      "EditorID": "1",
+      "Modified": "2020-04-10T11:48:30.849Z",
       "StatusID": 2,
-      "InitiatorID": 9,
+      "InitiatorID": "9",
       "Comment": "3",
-      "PerformerMembers": [
-        2
-      ]
+      "EditVersion": 1
     },
     {
-      "ID": 6,
-      "Title": "Сделать что-нибудь хорошее",
-      "AuthorID": 1,
-      "DueDate": "2020/04/16",
-      "PerformerID": 3,
-      "Created": "2020-04-06T11:40:08.047Z",
-      "CompletePercent": 1,
-      "EditorID": 1,
-      "Modified": "2020-04-09T05:51:53.308Z",
-      "StatusID": 1,
-      "InitiatorID": 9,
-      "Comment": "444"
-    },
-    {
-      "Title": "Погулять на улице",
-      "InitiatorID": 7,
-      "PerformerID": 2,
+      "Title": "Доработать модуль КВАНТ",
+      "InitiatorID": "10",
+      "DepartmentID": "2",
       "DueDate": "2020/04/22",
-      "StatusID": 1,
-      "ID": 7,
-      "AuthorID": 1,
+      "StatusID": "1",
+      "ID": "7",
+      "AuthorID": "1",
       "Created": "2020-04-09T07:38:20.724Z",
-      "EditorID": 1,
-      "Modified": "2020-04-09T14:42:45.945Z",
-      "PerformerMembers": [
-        5,
-        6
-      ],
+      "EditorID": "1",
+      "Modified": "2020-04-10T11:03:19.760Z",
+      "PerformerID": "7",
       "ObserverMembers": [
-        9,
-        8
-      ]
+        "9",
+        "1ae941af-180c-4a69-8334-9ea6ac137478"
+      ],
+      "PerformerMembers": [
+        "5",
+        "3"
+      ],
+      "EditVersion": 5
     }
   ],
   "users": [
     {
-      "ID": 1,
+      "ID": "1",
       "Title": "Иванов И.И.",
-      "EditorID": 1,
-      "Modified": "2020-04-07T15:23:27.625Z",
+      "EditorID": "1",
+      "Modified": "2020-04-10T08:09:47.117Z",
       "Email": "ivanov@gmai.com",
-      "DepartmentID": 1,
-      "Created": "2020-04-08T06:57:11.458Z"
+      "DepartmentID": "1",
+      "Created": "2020-04-08T06:57:11.458Z",
+      "PhoneNumber": "29-78",
+      "EmployeeNumber": "16574",
+      "EditVersion": 1
     },
     {
-      "ID": 2,
+      "ID": "2",
       "Title": "Петров П.П.",
-      "EditorID": 1,
-      "Modified": "2020-04-07T15:19:39.270Z",
-      "DepartmentID": 1,
+      "EditorID": "1",
+      "Modified": "2020-04-10T08:20:27.105Z",
+      "DepartmentID": "1",
       "Email": "petrov@gmail.com",
-      "Created": "2020-04-08T06:57:11.458Z"
+      "Created": "2020-04-08T06:57:11.458Z",
+      "EmployeeNumber": "16257",
+      "EditVersion": 3,
+      "PhoneNumber": "07-20"
     },
     {
-      "ID": 3,
+      "ID": "3",
       "Title": "Сидоров С.С.",
       "EditorID": 1,
-      "Modified": "2020-04-07T15:24:25.562Z",
+      "Modified": "2020-04-10T10:27:12.904Z",
       "Email": "sidorov@gmail.com",
-      "DepartmentID": 2,
-      "Created": "2020-04-08T06:57:11.458Z"
+      "DepartmentID": "2",
+      "Created": "2020-04-08T06:57:11.458Z",
+      "EmployeeNumber": "16743",
+      "PhoneNumber": "56-21",
+      "EditVersion": 1
     },
     {
-      "ID": 4,
+      "ID": "4",
       "Title": "Морозов М.М.",
-      "EditorID": 1,
+      "EditorID": "1",
       "Modified": "2020-04-07T15:25:52.970Z",
-      "DepartmentID": 2,
+      "DepartmentID": "2",
       "Email": "morozov@gmail.com",
       "Created": "2020-04-08T06:57:11.458Z"
     },
     {
       "Title": "Труманов Г.П.",
       "Email": "trumanov@gmail.com",
-      "ID": 5,
-      "AuthorID": 1,
+      "ID": "5",
+      "AuthorID": "1",
       "Created": "2020-04-07T12:47:01.025Z",
-      "EditorID": 1,
+      "EditorID": "1",
       "Modified": "2020-04-07T15:23:40.241Z",
-      "DepartmentID": 3
+      "DepartmentID": "3"
     },
     {
       "Title": "Правдин Г.А.",
       "Email": "pravdin@gmail.com",
-      "DepartmentID": 3,
-      "ID": 6,
-      "AuthorID": 1,
+      "DepartmentID": "3",
+      "ID": "6",
+      "AuthorID": "1",
       "Created": "2020-04-07T15:27:07.477Z"
     },
     {
-      "DepartmentID": 2,
+      "DepartmentID": "2",
       "Title": "Кривдин Е.Ю.",
       "Email": "krivdin@gmail.com",
-      "ID": 7,
-      "AuthorID": 1,
+      "ID": "7",
+      "AuthorID": "1",
       "Created": "2020-04-07T15:27:50.087Z"
     },
     {
       "Title": "Важенин Н.А.",
       "Email": "vazhenin@gmail.com",
-      "DepartmentID": 2,
-      "ID": 8,
-      "AuthorID": 1,
+      "DepartmentID": "2",
+      "ID": "8",
+      "AuthorID": "1",
       "Created": "2020-04-08T03:18:20.442Z"
     },
     {
       "Title": "Маршал О.М",
       "Email": "marshal@gmail.com",
-      "ID": 9,
-      "AuthorID": 1,
+      "ID": "9",
+      "AuthorID": "1",
       "Created": "2020-04-08T06:56:47.211Z",
-      "EditorID": 1,
+      "EditorID": "1",
       "Modified": "2020-04-09T05:49:35.160Z",
-      "DepartmentID": 4
+      "DepartmentID": "4"
     },
     {
       "Title": "Волков Д.Л.",
       "Email": "volkov@gmail.com",
-      "DepartmentID": 5,
-      "ID": 10,
-      "AuthorID": 1,
+      "DepartmentID": "5",
+      "ID": "10",
+      "AuthorID": "1",
       "Created": "2020-04-09T15:28:26.278Z"
+    },
+    {
+      "Title": "Михайлов А.И.",
+      "Email": "mikhailov@gmail.com",
+      "ID": "1ae941af-180c-4a69-8334-9ea6ac137478",
+      "EditorID": 1,
+      "AuthorID": "1",
+      "Modified": "2020-04-10T10:29:17.342Z",
+      "Created": "2020-04-10T10:13:27.610Z",
+      "EditVersion": 1,
+      "DepartmentID": "fa0ca011-3a56-4b96-88b8-3b81c1362655",
+      "EmployeeNumber": "16309",
+      "PhoneNumber": "33-97"
     }
   ],
   "departments": [
     {
       "Title": "Отдел проектирования",
-      "ID": 1,
-      "AuthorID": 1,
+      "ID": "1",
+      "AuthorID": "1",
       "Created": "2020-04-07T14:57:56.057Z",
-      "EditorID": 1,
+      "EditorID": "1",
       "Modified": "2020-04-07T15:22:11.175Z",
-      "ChiefID": 1
+      "ChiefID": "1"
     },
     {
       "Title": "Отдел разработок",
-      "ID": 2,
-      "AuthorID": 1,
+      "ID": "2",
+      "AuthorID": "1",
       "Created": "2020-04-07T14:58:29.353Z",
-      "EditorID": 1,
+      "EditorID": "1",
       "Modified": "2020-04-07T15:21:59.662Z",
-      "ChiefID": 4
+      "ChiefID": "4"
     },
     {
       "Title": "Отдел инноваций",
-      "ChiefID": 5,
-      "ID": 3,
-      "AuthorID": 1,
+      "ChiefID": "5",
+      "ID": "3",
+      "AuthorID": "1",
       "Created": "2020-04-07T15:21:40.916Z"
     },
     {
       "Title": "Руководство",
-      "ChiefID": 9,
-      "ID": 4,
-      "AuthorID": 1,
+      "ChiefID": "9",
+      "ID": "4",
+      "AuthorID": "1",
       "Created": "2020-04-08T06:57:11.458Z"
     },
     {
       "Title": "Отдел контроля качества",
-      "ID": 5,
-      "AuthorID": 1,
-      "EditorID": 1,
+      "ID": "5",
+      "AuthorID": "1",
+      "EditorID": "1",
       "Modified": "2020-04-09T07:34:50.326Z",
-      "ChiefID": 10,
+      "ChiefID": "10",
       "Created": "2020-04-08T06:57:11.458Z"
+    },
+    {
+      "Title": "Отдел внедрения",
+      "ID": "fa0ca011-3a56-4b96-88b8-3b81c1362655",
+      "EditorID": 1,
+      "AuthorID": "1",
+      "Modified": "2020-04-10T10:27:49.168Z",
+      "Created": "2020-04-10T08:41:30.501Z",
+      "ChiefID": "1ae941af-180c-4a69-8334-9ea6ac137478",
+      "EditVersion": 1
+    },
+    {
+      "Title": "Отдел сопровождения",
+      "ID": "14860524-4311-422d-8290-692efbaee2b1",
+      "EditorID": "1",
+      "AuthorID": "1",
+      "Modified": "2020-04-10T10:40:40.421Z",
+      "Created": "2020-04-10T10:40:40.421Z",
+      "EditVersion": 0
+    }
+  ],
+  "positions": [
+    {
+      "Title": "Начальник отдела",
+      "ID": "71605b1e-2e4e-4d16-9d53-c9f12c099e63",
+      "EditorID": "1",
+      "AuthorID": "1",
+      "Modified": "2020-04-13T17:11:43.575Z",
+      "Created": "2020-04-13T08:26:25.635Z",
+      "EditVersion": 1,
+      "IsChief": true
+    },
+    {
+      "Title": "Менеджер",
+      "ID": "39e84c93-fe04-43ff-b038-7ce92bfa55ee",
+      "EditorID": "1",
+      "AuthorID": "1",
+      "Modified": "2020-04-13T17:17:12.082Z",
+      "Created": "2020-04-13T08:26:40.249Z",
+      "EditVersion": 1,
+      "IsChief": false
+    },
+    {
+      "Title": "Главный специалист",
+      "ID": "73d8cfa6-64c6-4b29-8585-e7eedf9e22f4",
+      "EditorID": "1",
+      "AuthorID": "1",
+      "Modified": "2020-04-13T17:17:18.002Z",
+      "Created": "2020-04-13T08:26:53.374Z",
+      "EditVersion": 1,
+      "IsChief": false
+    },
+    {
+      "Title": "Ведущий инженер",
+      "ID": "dd997f3f-696c-4791-bde3-a33db7601459",
+      "EditorID": "1",
+      "AuthorID": "1",
+      "Modified": "2020-04-13T17:17:30.122Z",
+      "Created": "2020-04-13T08:27:05.167Z",
+      "EditVersion": 2,
+      "IsChief": false
+    },
+    {
+      "Title": "Инженер 1 категории",
+      "ID": "aa72dc24-17d8-48ac-8580-9aa97424135f",
+      "EditorID": "1",
+      "AuthorID": "1",
+      "Modified": "2020-04-13T17:17:38.061Z",
+      "Created": "2020-04-13T08:27:22.930Z",
+      "EditVersion": 1,
+      "IsChief": false
+    },
+    {
+      "IsChief": false,
+      "Title": "Инженер 2 категории",
+      "ID": "192137fb-967a-481c-87c7-49ce361fa64c",
+      "EditorID": "1",
+      "AuthorID": "1",
+      "Modified": "2020-04-13T17:22:00.070Z",
+      "Created": "2020-04-13T17:22:00.070Z",
+      "EditVersion": 0
     }
   ]
 }

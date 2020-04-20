@@ -12,8 +12,8 @@ export default {
                     throw e;
                 })
         },
-        async loadUser({commit}, ID) {
-            await api.load("users", ID)
+        async loadUser({commit}, key) {
+            await api.load("users", key)
                 .then((res) => {
                     commit("setUser", res.data);
                 })
@@ -21,14 +21,12 @@ export default {
                     throw e;
                 })
         },
-        async createUser({commit, getters}, user) {
-            if(user) {
-                user.ID = getters.getLastUser ? (getters.getLastUser.ID + 1) : 0;
-                user.AuthorID = 1;
-                user.Created = new Date();
-                await api.create("users", user)
+        async createUser({commit, getters}, values) {
+            const user = getters.getUserByTitle(values.Title);
+            if(!user) {
+                await api.create("users", values)
                     .then(() => {
-                        commit("addUser", user);
+                        commit("addUser", values);
                     })
                     .catch(e => {
                         throw e;
@@ -36,10 +34,8 @@ export default {
             }
         },
         async updateUser({commit, getters}, {key, values}) {
-            const user = getters.getUser(key);
+            const user = getters.getUserByID(key);
             if(user && user.ID) {
-                user.EditorID = 1;
-                user.Modified = new Date();
                 Object.assign(user, values);
                 await api.update("users", user.ID, user)
                     .then(() => {
@@ -50,10 +46,10 @@ export default {
                     })
             }
         },
-        async deleteUser({commit}, ID) {
-            await api.delete("users", ID)
+        async deleteUser({commit}, key) {
+            await api.delete("users", key)
                 .then(() => {
-                    commit("removeUser", {ID});
+                    commit("removeUser", {ID:key});
                 })
                 .catch(e => {
                     throw e;
@@ -84,14 +80,11 @@ export default {
         getUsers: (state) => {
             return state.users;
         },
-        getUserCount: (state) => {
-            return state.users.length;
+        getUserByID: (state) => (ID) => {
+            return state.users.find(u => u.ID == ID);
         },
-        getUser: (state) => (ID) => {
-            return state.users.find(t => t.ID == ID);
-        },
-        getLastUser: (state) => {
-            return state.users.reduce((a, c) => a.ID > c.ID ? a : c);
+        getUserByTitle: (state) => (Title) => {
+            return state.users.find(u => u.Title == Title);
         }
     }
 }
